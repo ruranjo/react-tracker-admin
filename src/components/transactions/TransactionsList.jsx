@@ -8,8 +8,10 @@ export default function TransactionsList() {
     <Section>
         {
             transaction.map(({id,amount,description}) => {
+                const color = (amount > 0) ? 'green': 'red'
+                const text = 'transaction-block ' + color
                 return ( 
-                <div className='transaction-block' key={id}>
+                <div className={text}  key={id}>
                     <p>Description: {description}</p>
                     <span>Monto: {amount}</span>
                     <button className="btn btn-delete" onClick={() => {
@@ -26,16 +28,24 @@ export default function TransactionsList() {
 }
 
 const Section = styled.section`
-    margin: 1rem;
+    margin: 2rem;
+    
     .transaction-block{
+        justify-content: space-between;
         display:flex;
         align-items: center;
-        gap:1rem;
-        background-color: #A5FFC9;
+        gap:2rem;    
         color: #17241C;
         padding: .5rem;
-        
+        margin:1rem;
         border-radius: 1rem;
+        border: solid gray 3px;
+    }
+    .green{
+        background-color: #A5FFC9;
+    }
+    .red{
+        background-color: red;
     }
 
     button {

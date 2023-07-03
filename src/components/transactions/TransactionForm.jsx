@@ -17,7 +17,7 @@ export default function TransactionForm() {
     const handleSubmit = (e) =>{
         e.preventDefault()
         const id = window.crypto.randomUUID()
-        addTransaction({id , amount, description});
+        addTransaction({id , amount: +amount, description});
     } 
 
   return (
