@@ -46,6 +46,7 @@ const Section = styled.section`
     }
     .red{
         background-color: red;
+        color: white;
     }
 
     button {

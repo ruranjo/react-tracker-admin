@@ -1,4 +1,4 @@
-import {createContext, useReducer} from 'react'
+import {createContext, useEffect, useReducer} from 'react'
 import { useContext } from 'react';
 import ApiReducer from './ApiReducer';
 
@@ -9,8 +9,16 @@ export const GlobalProvider = ({children}) =>{
     const initialState = {
         transactions: []
     }
-    const [state , dispatch] = useReducer(ApiReducer, initialState);
+    
+    const [state , dispatch] = useReducer(ApiReducer, initialState,
+    () =>{
+        const localData = localStorage.getItem('transactions')
+        return localData ? JSON.parse(localData) : initialState;
+    });
 
+    useEffect(() =>{
+        localStorage.setItem('transactions', JSON.stringify(state))
+    },[state])
     const addTransaction = (transactionObj) =>{
         dispatch({
             type:"ADD_TRANSATION",
